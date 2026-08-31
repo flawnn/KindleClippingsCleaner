@@ -1,16 +1,16 @@
 // read file from same directory
 var fs = require('fs');
-var file = fs.readFileSync('./gg.txt', 'utf8').split("==========");
+var file = fs.readFileSync('./My Clippings.txt', 'utf8').split("==========");
 let res = ""
 
 let prev = undefined
 // Identifier for note entries
-let rgx = RegExp("Ihre Notiz auf")
+let rgx = RegExp("Ihre Notiz auf|Note on|Noted on")
 
 for(let entry of file){
     if(!rgx.test(entry)){
         // Change "Position" with the corresponding key word in your clipping file's language
-        let line = entry.match(/(?<=Position )\d+(-\d+)?/g)
+        let line = entry.match(/(?<=Position |Location )\d+(-\d+)?/g)
         if(prev){
             if(line != undefined) {
                 line = line[0].split("-");
